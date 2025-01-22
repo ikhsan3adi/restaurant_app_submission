@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class MaterialTheme {
+class RestaurantTheme {
   final TextTheme textTheme;
 
-  const MaterialTheme(this.textTheme);
+  const RestaurantTheme(this.textTheme);
 
   ThemeData theme(ColorScheme colorScheme) {
     return ThemeData(

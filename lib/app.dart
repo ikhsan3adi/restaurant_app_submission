@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/theme/theme_mode_provider.dart';
-import 'package:restaurant_app/screen/main/main_screen.dart';
+import 'package:restaurant_app/screen/detail/detail_screen.dart';
+import 'package:restaurant_app/screen/home/home_screen.dart';
+import 'package:restaurant_app/screen/search/search_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
-import 'package:restaurant_app/style/material_theme.dart';
-import 'package:restaurant_app/style/util.dart';
+import 'package:restaurant_app/style/theme/restaurant_theme.dart';
+import 'package:restaurant_app/style/theme/util.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -17,7 +19,7 @@ class App extends StatelessWidget {
       bodyFontString: 'DM Sans',
     );
 
-    MaterialTheme theme = MaterialTheme(textTheme);
+    RestaurantTheme theme = RestaurantTheme(textTheme);
 
     return Consumer<ThemeModeProvider>(
       builder: (context, value, _) {
@@ -26,9 +28,17 @@ class App extends StatelessWidget {
           theme: theme.light(),
           darkTheme: theme.dark(),
           themeMode: value.themeMode,
-          initialRoute: NavigationRoute.mainRoute.name,
+          initialRoute: NavigationRoute.homeRoute.name,
           routes: {
-            NavigationRoute.mainRoute.name: (_) => MainScreen(),
+            NavigationRoute.homeRoute.name: (_) => HomeScreen(),
+            NavigationRoute.detailRoute.name: (context) {
+              // TODO: parameter id
+              return DetailScreen();
+            },
+            NavigationRoute.searchRoute.name: (context) {
+              // TODO: parameter query
+              return SearchScreen();
+            },
           },
         );
       },
