@@ -1,18 +1,18 @@
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_customer_review.dart';
 
-class AddReviewResponse {
+class NewRestaurantReviewResponse {
   final bool error;
   final String message;
   final List<RestaurantCustomerReview> customerReviews;
 
-  const AddReviewResponse({
+  const NewRestaurantReviewResponse({
     required this.error,
     required this.message,
     required this.customerReviews,
   });
 
-  factory AddReviewResponse.fromJson(Map<String, dynamic> json) {
-    return AddReviewResponse(
+  factory NewRestaurantReviewResponse.fromJson(Map<String, dynamic> json) {
+    return NewRestaurantReviewResponse(
       error: json['error'],
       message: json['message'],
       customerReviews: List<RestaurantCustomerReview>.from(
