@@ -1,6 +1,6 @@
 {
-    "name": "restaurant_app",
-    "short_name": "restaurant_app",
+    "name": "QuickRestaurant",
+    "short_name": "QuickRestaurant",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -24,7 +24,7 @@ class App extends StatelessWidget {
     return Consumer<ThemeModeProvider>(
       builder: (context, value, _) {
         return MaterialApp(
-          title: 'Restaurant App',
+          title: 'QuickRestaurant',
           theme: theme.light(),
           darkTheme: theme.dark(),
           themeMode: value.themeMode,
