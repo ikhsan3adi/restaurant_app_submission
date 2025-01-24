@@ -8,10 +8,14 @@ class RestaurantCardWidget extends StatelessWidget {
     super.key,
     required this.restaurant,
     required this.onPressed,
+    this.imageHeroTag,
+    this.titleHeroTag,
   });
 
   final Restaurant restaurant;
   final VoidCallback onPressed;
+  final Object? imageHeroTag;
+  final Object? titleHeroTag;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +39,10 @@ class RestaurantCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Hero(
-                  tag: restaurant.pictureId,
+              Hero(
+                tag: imageHeroTag ?? restaurant.pictureId,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
                   child: Image.network(
                     ApiServices.restaurantImageUrl(
                       restaurant.pictureId,
@@ -69,11 +73,14 @@ class RestaurantCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 4,
                   children: [
-                    Text(
-                      restaurant.name,
-                      style: textTheme.titleLarge,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    Hero(
+                      tag: titleHeroTag ?? restaurant.id,
+                      child: Text(
+                        restaurant.name,
+                        style: textTheme.titleLarge,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
