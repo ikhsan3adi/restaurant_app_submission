@@ -13,13 +13,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = createTextTheme(
+    final textTheme = createTextTheme(
       context,
       displayFontString: 'Outfit',
       bodyFontString: 'DM Sans',
     );
 
-    RestaurantTheme theme = RestaurantTheme(textTheme);
+    final theme = RestaurantTheme(textTheme);
 
     return Consumer<ThemeModeProvider>(
       builder: (context, value, _) {
