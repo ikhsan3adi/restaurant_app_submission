@@ -8,23 +8,21 @@ class RestaurantInfoTileWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    return SliverPadding(
+    return Padding(
       padding: EdgeInsets.all(16),
-      sliver: SliverToBoxAdapter(
-        child: Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.tertiaryContainer,
-            borderRadius: BorderRadius.circular(20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.tertiaryContainer,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ListTile(
+          leading: Icon(
+            Icons.restaurant_outlined,
+            color: theme.colorScheme.onTertiaryContainer,
           ),
-          child: ListTile(
-            leading: Icon(
-              Icons.restaurant_outlined,
-              color: theme.colorScheme.onTertiaryContainer,
-            ),
-            textColor: theme.colorScheme.onTertiaryContainer,
-            titleTextStyle: textTheme.bodyMedium,
-            title: Text('Quick solutions for your restaurant needs.'),
-          ),
+          textColor: theme.colorScheme.onTertiaryContainer,
+          titleTextStyle: textTheme.bodyMedium,
+          title: Text('Quick solutions for your restaurant needs.'),
         ),
       ),
     );

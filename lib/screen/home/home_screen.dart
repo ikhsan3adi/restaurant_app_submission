@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           slivers: [
             HomeScreenAppBarWidget(),
-            RestaurantInfoTileWidget(),
+            SliverToBoxAdapter(child: RestaurantInfoTileWidget()),
             Consumer<RestaurantListProvider>(
               builder: (context, value, _) {
                 return switch (value.resultState) {
