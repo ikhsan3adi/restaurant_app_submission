@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/theme/theme_mode_provider.dart';
+import 'package:restaurant_app/static/navigation_route.dart';
 
 class HomeScreenAppBarWidget extends StatelessWidget {
   const HomeScreenAppBarWidget({
@@ -15,6 +16,16 @@ class HomeScreenAppBarWidget extends StatelessWidget {
         titlePadding: EdgeInsets.all(16),
       ),
       actions: [
+        IconButton(
+          tooltip: 'Search Restaurant',
+          onPressed: () {
+            Navigator.pushNamed(context, NavigationRoute.searchRoute.name);
+          },
+          icon: Hero(
+            tag: 'search-btn',
+            child: Icon(Icons.search),
+          ),
+        ),
         IconButton(
           tooltip: 'Switch Theme',
           onPressed: () {

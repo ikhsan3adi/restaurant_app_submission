@@ -31,11 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Search Restaurant',
-        child: Icon(Icons.search),
-        onPressed: () {},
-      ),
       body: RefreshIndicator(
         onRefresh: () async {
           context.read<RestaurantListProvider>().fetchRestaurantList();

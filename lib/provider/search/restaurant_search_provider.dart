@@ -7,21 +7,22 @@ class RestaurantSearchProvider extends ChangeNotifier {
 
   RestaurantSearchProvider(this._apiServices);
 
-  RestaurantSearchResultState _resultState = RestaurantSearchNoneState();
+  String _query = '';
+  String get query => _query;
 
+  RestaurantSearchResultState _resultState = RestaurantSearchNoneState();
   RestaurantSearchResultState get resultState => _resultState;
 
-  // TODO: fix method name?
   Future<void> searchRestaurant(String query) async {
     try {
+      _query = query;
       _resultState = RestaurantSearchLoadingState();
       notifyListeners();
 
       final result = await _apiServices.getRestaurantSearchResult(query);
 
       if (result.error) {
-        //! TODO: Missing error message
-        _resultState = RestaurantSearchErrorState('');
+        _resultState = RestaurantSearchErrorState('Unknown Error');
         notifyListeners();
         return;
       }
