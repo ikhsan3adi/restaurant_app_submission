@@ -1,3 +1,4 @@
+import 'package:restaurant_app/data/enum/restaurant_menu_type.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_menu.dart';
 
 class RestaurantMenus {
@@ -12,10 +13,16 @@ class RestaurantMenus {
   factory RestaurantMenus.fromJson(Map<String, dynamic> json) {
     return RestaurantMenus(
       foods: List<RestaurantMenu>.from(
-        json['foods'].map((x) => RestaurantMenu.fromJson(x)),
+        json['foods'].map((x) => RestaurantMenu(
+              name: x['name'] as String,
+              type: RestaurantMenuType.food,
+            )),
       ),
       drinks: List<RestaurantMenu>.from(
-        json['drinks'].map((x) => RestaurantMenu.fromJson(x)),
+        json['drinks'].map((x) => RestaurantMenu(
+              name: x['name'] as String,
+              type: RestaurantMenuType.drink,
+            )),
       ),
     );
   }

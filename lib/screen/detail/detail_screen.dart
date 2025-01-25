@@ -5,6 +5,7 @@ import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen_app_bar_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_categories_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_description_widget.dart';
+import 'package:restaurant_app/screen/detail/restaurant_menus_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_normal_header.dart';
 import 'package:restaurant_app/screen/detail/restaurant_title_header.dart';
 import 'package:restaurant_app/screen/home/restaurant_list_error_widget.dart';
@@ -41,6 +42,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -72,7 +76,46 @@ class _DetailScreenState extends State<DetailScreen> {
             },
           ),
           RestaurantNormalHeader(text: 'Menus'),
-          // TODO: Menus
+          // Foods
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Foods', style: textTheme.titleSmall),
+            ),
+          ),
+          Consumer<RestaurantDetailProvider>(
+            builder: (context, value, _) => switch (value.resultState) {
+              RestaurantDetailLoadedState(data: var restaurant) =>
+                RestaurantMenusWidget(menus: restaurant.menus.foods),
+              _ => SliverToBoxAdapter(),
+            },
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 128),
+              child: Divider(),
+            ),
+          ),
+          // Drinks
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text('Drinks', style: textTheme.titleSmall),
+            ),
+          ),
+          Consumer<RestaurantDetailProvider>(
+            builder: (context, value, _) => switch (value.resultState) {
+              RestaurantDetailLoadedState(data: var restaurant) =>
+                RestaurantMenusWidget(menus: restaurant.menus.drinks),
+              _ => SliverToBoxAdapter(),
+            },
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Divider(),
+            ),
+          ),
           RestaurantNormalHeader(text: 'Reviews'),
           // TODO: Reviews
         ],

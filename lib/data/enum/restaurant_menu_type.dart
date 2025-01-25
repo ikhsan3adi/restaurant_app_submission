@@ -1,0 +1,4 @@
+enum RestaurantMenuType {
+  food,
+  drink,
+}
