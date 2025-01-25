@@ -108,7 +108,11 @@ class RestaurantCardWidget extends StatelessWidget {
                         Flexible(
                           child: Text(
                             restaurant.rating.toString(),
-                            style: textTheme.bodyMedium,
+                            style: textTheme.bodyMedium?.copyWith(
+                              color: restaurant.rating >= 5.0
+                                  ? theme.colorScheme.tertiary
+                                  : theme.colorScheme.onSurface,
+                            ),
                             maxLines: 1,
                           ),
                         ),
