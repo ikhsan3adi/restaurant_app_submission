@@ -24,26 +24,31 @@ class MenuCardWidget extends StatelessWidget {
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            height: 110,
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Icon(
-                menu.type == RestaurantMenuType.food
-                    ? Icons.restaurant_menu_outlined
-                    : Icons.coffee_outlined,
-                size: 64,
-                color: theme.colorScheme.primary,
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Icon(
+                  menu.type == RestaurantMenuType.food
+                      ? Icons.restaurant_menu_outlined
+                      : Icons.coffee_outlined,
+                  size: 64,
+                  color: menu.type == RestaurantMenuType.food
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.tertiary,
+                ),
               ),
             ),
           ),
           Text(
             menu.name,
-            style: textTheme.titleLarge,
-            maxLines: 1,
+            style: textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ],
