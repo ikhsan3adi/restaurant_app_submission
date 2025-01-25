@@ -49,6 +49,7 @@ class _SearchScreenAppBarWidgetState extends State<SearchScreenAppBarWidget> {
             borderRadius: BorderRadius.circular(20),
           ),
           suffixIcon: IconButton(
+            tooltip: 'Search Restaurant',
             onPressed: () {
               context
                   .read<RestaurantSearchProvider>()
