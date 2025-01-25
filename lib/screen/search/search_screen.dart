@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
 import 'package:restaurant_app/screen/home/restaurant_card_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_loading_indicator_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
 import 'package:restaurant_app/screen/search/search_info_tile_widget.dart';
 import 'package:restaurant_app/screen/search/search_screen_app_bar_widget.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
@@ -22,11 +22,11 @@ class SearchScreen extends StatelessWidget {
           Consumer<RestaurantSearchProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantSearchLoadingState() => SliverFillRemaining(
-                  child: RestaurantListLoadingIndicatorWidget(),
+                  child: RestaurantLoadingIndicatorWidget(),
                 ),
               RestaurantSearchErrorState(error: var message) =>
                 SliverFillRemaining(
-                  child: RestaurantListErrorWidget(message: message),
+                  child: RestaurantErrorWidget(message: message),
                 ),
               RestaurantSearchLoadedState(data: var restaurants) =>
                 SliverList.builder(

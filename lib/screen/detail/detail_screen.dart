@@ -8,8 +8,8 @@ import 'package:restaurant_app/screen/detail/restaurant_description_widget.dart'
 import 'package:restaurant_app/screen/detail/restaurant_menus_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_normal_header.dart';
 import 'package:restaurant_app/screen/detail/restaurant_title_header.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_loading_indicator_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -60,11 +60,11 @@ class _DetailScreenState extends State<DetailScreen> {
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadingState() => SliverFillRemaining(
-                  child: RestaurantListLoadingIndicatorWidget(),
+                  child: RestaurantLoadingIndicatorWidget(),
                 ),
               RestaurantDetailErrorState(error: var message) =>
                 SliverFillRemaining(
-                  child: RestaurantListErrorWidget(message: message),
+                  child: RestaurantErrorWidget(message: message),
                 ),
               RestaurantDetailLoadedState(data: var restaurant) =>
                 SliverList.list(

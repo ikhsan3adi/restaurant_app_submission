@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RestaurantListErrorWidget extends StatelessWidget {
-  const RestaurantListErrorWidget({
+class RestaurantErrorWidget extends StatelessWidget {
+  const RestaurantErrorWidget({
     super.key,
     required this.message,
   });

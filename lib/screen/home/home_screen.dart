@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/home/home_screen_app_bar_widget.dart';
 import 'package:restaurant_app/screen/home/restaurant_card_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
 import 'package:restaurant_app/screen/home/restaurant_info_tile_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_list_loading_indicator_widget.dart';
+import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
 
@@ -42,11 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
             Consumer<RestaurantListProvider>(
               builder: (context, value, _) => switch (value.resultState) {
                 RestaurantListLoadingState() => SliverFillRemaining(
-                    child: RestaurantListLoadingIndicatorWidget(),
+                    child: RestaurantLoadingIndicatorWidget(),
                   ),
                 RestaurantListErrorState(error: var message) =>
                   SliverFillRemaining(
-                    child: RestaurantListErrorWidget(message: message),
+                    child: RestaurantErrorWidget(message: message),
                   ),
                 RestaurantListLoadedState(data: var restaurants) =>
                   SliverList.builder(

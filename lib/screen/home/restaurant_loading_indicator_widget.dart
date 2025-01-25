@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RestaurantListLoadingIndicatorWidget extends StatelessWidget {
-  const RestaurantListLoadingIndicatorWidget({super.key});
+class RestaurantLoadingIndicatorWidget extends StatelessWidget {
+  const RestaurantLoadingIndicatorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
