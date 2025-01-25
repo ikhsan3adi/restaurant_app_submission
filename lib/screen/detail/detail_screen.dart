@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen_app_bar_widget.dart';
+import 'package:restaurant_app/screen/detail/restaurant_categories_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_description_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_normal_header.dart';
 import 'package:restaurant_app/screen/detail/restaurant_title_header.dart';
@@ -40,9 +41,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -55,7 +53,7 @@ class _DetailScreenState extends State<DetailScreen> {
             titleHeroTag: widget.titleHeroTag ?? widget.restaurant.id,
           ),
           Consumer<RestaurantDetailProvider>(
-            builder: (context, value, child) => switch (value.resultState) {
+            builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadingState() => SliverFillRemaining(
                   child: RestaurantListLoadingIndicatorWidget(),
                 ),
@@ -66,6 +64,7 @@ class _DetailScreenState extends State<DetailScreen> {
               RestaurantDetailLoadedState(data: var restaurant) =>
                 SliverList.list(
                   children: [
+                    RestaurantCategoriesWidget(restaurant: restaurant),
                     RestaurantDescriptionWidget(restaurant: restaurant),
                   ],
                 ),
