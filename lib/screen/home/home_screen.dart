@@ -40,35 +40,35 @@ class _HomeScreenState extends State<HomeScreen> {
             HomeScreenAppBarWidget(),
             SliverToBoxAdapter(child: RestaurantInfoTileWidget()),
             Consumer<RestaurantListProvider>(
-              builder: (context, value, _) {
-                return switch (value.resultState) {
-                  RestaurantListLoadingState() => SliverFillRemaining(
-                      child: RestaurantListLoadingIndicatorWidget(),
-                    ),
-                  RestaurantListErrorState(error: var message) =>
-                    SliverFillRemaining(
-                      child: RestaurantListErrorWidget(message: message),
-                    ),
-                  RestaurantListLoadedState(data: var restaurants) =>
-                    SliverList.builder(
-                      itemCount: restaurants.length,
-                      itemBuilder: (context, index) {
-                        final restaurant = restaurants[index];
+              builder: (context, value, _) => switch (value.resultState) {
+                RestaurantListLoadingState() => SliverFillRemaining(
+                    child: RestaurantListLoadingIndicatorWidget(),
+                  ),
+                RestaurantListErrorState(error: var message) =>
+                  SliverFillRemaining(
+                    child: RestaurantListErrorWidget(message: message),
+                  ),
+                RestaurantListLoadedState(data: var restaurants) =>
+                  SliverList.builder(
+                    itemCount: restaurants.length,
+                    itemBuilder: (context, index) {
+                      final restaurant = restaurants[index];
 
-                        return RestaurantCardWidget(
-                          restaurant: restaurant,
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              NavigationRoute.detailRoute.name,
-                              arguments: restaurant.id,
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  _ => SliverToBoxAdapter(),
-                };
+                      return RestaurantCardWidget(
+                        restaurant: restaurant,
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            NavigationRoute.detailRoute.name,
+                            arguments: {
+                              'restaurant': restaurant.toJson(),
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                _ => SliverToBoxAdapter(),
               },
             ),
           ],

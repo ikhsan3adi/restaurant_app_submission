@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/theme/theme_mode_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/home/home_screen.dart';
@@ -32,13 +33,14 @@ class App extends StatelessWidget {
           routes: {
             NavigationRoute.homeRoute.name: (_) => HomeScreen(),
             NavigationRoute.detailRoute.name: (context) {
-              // TODO: parameter id
-              return DetailScreen();
+              final args = ModalRoute.of(context)!.settings.arguments as Map;
+              return DetailScreen(
+                restaurant: Restaurant.fromJson(args['restaurant']),
+                imageHeroTag: args['imageHeroTag'],
+                titleHeroTag: args['titleHeroTag'],
+              );
             },
-            NavigationRoute.searchRoute.name: (context) {
-              // TODO: parameter query
-              return SearchScreen();
-            },
+            NavigationRoute.searchRoute.name: (_) => SearchScreen(),
           },
         );
       },

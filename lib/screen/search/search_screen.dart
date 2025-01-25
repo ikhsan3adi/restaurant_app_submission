@@ -20,52 +20,49 @@ class SearchScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(child: SearchInfoTileWidget()),
           Consumer<RestaurantSearchProvider>(
-            builder: (context, value, _) {
-              return switch (value.resultState) {
-                RestaurantSearchLoadingState() => SliverFillRemaining(
-                    child: RestaurantListLoadingIndicatorWidget(),
-                  ),
-                RestaurantSearchErrorState(error: var message) =>
-                  SliverFillRemaining(
-                    child: RestaurantListErrorWidget(message: message),
-                  ),
-                RestaurantSearchLoadedState(data: var restaurants) =>
-                  SliverList.builder(
-                    itemCount: restaurants.length,
-                    itemBuilder: (context, index) {
-                      final restaurant = restaurants[index];
-                      final imageHeroTag = '${restaurant.pictureId}-search';
-                      final titleHeroTag = '${restaurant.id}-search';
+            builder: (context, value, _) => switch (value.resultState) {
+              RestaurantSearchLoadingState() => SliverFillRemaining(
+                  child: RestaurantListLoadingIndicatorWidget(),
+                ),
+              RestaurantSearchErrorState(error: var message) =>
+                SliverFillRemaining(
+                  child: RestaurantListErrorWidget(message: message),
+                ),
+              RestaurantSearchLoadedState(data: var restaurants) =>
+                SliverList.builder(
+                  itemCount: restaurants.length,
+                  itemBuilder: (context, index) {
+                    final restaurant = restaurants[index];
+                    final imageHeroTag = '${restaurant.pictureId}-search';
+                    final titleHeroTag = '${restaurant.id}-search';
 
-                      return RestaurantCardWidget(
-                        restaurant: restaurant,
-                        imageHeroTag: imageHeroTag,
-                        titleHeroTag: titleHeroTag,
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            NavigationRoute.detailRoute.name,
-                            arguments: {
-                              'restaurantId': restaurant.id,
-                              'pictureId': restaurant.pictureId,
-                              'imageHeroTag': imageHeroTag,
-                              'titleHeroTag': titleHeroTag,
-                            },
-                          );
-                        },
-                      );
-                    },
+                    return RestaurantCardWidget(
+                      restaurant: restaurant,
+                      imageHeroTag: imageHeroTag,
+                      titleHeroTag: titleHeroTag,
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          NavigationRoute.detailRoute.name,
+                          arguments: {
+                            'restaurant': restaurant.toJson(),
+                            'imageHeroTag': imageHeroTag,
+                            'titleHeroTag': titleHeroTag,
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+              _ => SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Icon(
+                    Icons.search,
+                    size: 64,
+                    color:
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
                   ),
-                _ => SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Icon(
-                      Icons.search,
-                      size: 64,
-                      color:
-                          Theme.of(context).colorScheme.surfaceContainerHighest,
-                    ),
-                  ),
-              };
+                ),
             },
           ),
         ],
