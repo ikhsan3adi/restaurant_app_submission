@@ -43,28 +43,25 @@ class RestaurantTitleHeader extends StatelessWidget {
               ),
               Flexible(
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 8,
                   children: [
-                    Icon(Icons.location_pin),
+                    Icon(
+                      Icons.location_pin,
+                      color: theme.colorScheme.primary,
+                    ),
                     Flexible(
                       child: Consumer<RestaurantDetailProvider>(
                         builder: (context, value, _) {
-                          return switch (value.resultState) {
-                            RestaurantDetailLoadedState(data: var detail) =>
-                              Text(
+                          return Text(
+                            switch (value.resultState) {
+                              RestaurantDetailLoadedState(data: var detail) =>
                                 '${detail.address}, ${detail.city}',
-                                style: textTheme.bodyMedium,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            _ => Text(
-                                restaurant.city,
-                                style: textTheme.bodyMedium,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                          };
+                              _ => restaurant.city,
+                            },
+                            style: textTheme.bodyMedium,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          );
                         },
                       ),
                     ),
