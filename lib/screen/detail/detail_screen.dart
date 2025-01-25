@@ -48,6 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          // Sliver App Bar with background image
           DetailScreenAppBarWidget(
             pictureId: widget.restaurant.pictureId,
             imageHeroTag: widget.imageHeroTag ?? widget.restaurant.pictureId,
@@ -70,6 +71,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   children: [
                     RestaurantCategoriesWidget(restaurant: restaurant),
                     RestaurantDescriptionWidget(restaurant: restaurant),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Divider(),
+                    ),
                   ],
                 ),
               _ => SliverToBoxAdapter(),
