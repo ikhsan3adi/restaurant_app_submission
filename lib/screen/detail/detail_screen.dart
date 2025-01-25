@@ -4,6 +4,7 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen_app_bar_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_categories_widget.dart';
+import 'package:restaurant_app/screen/detail/restaurant_customer_review_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_description_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_menus_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_normal_header.dart';
@@ -121,8 +122,15 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Divider(),
             ),
           ),
+          // Customer Reviews
           RestaurantNormalHeader(text: 'Reviews'),
-          // TODO: Reviews
+          Consumer<RestaurantDetailProvider>(
+            builder: (context, value, _) => switch (value.resultState) {
+              RestaurantDetailLoadedState(data: var restaurant) =>
+                RestaurantCustomerReviewWidget(restaurant: restaurant),
+              _ => SliverToBoxAdapter(),
+            },
+          ),
         ],
       ),
     );
