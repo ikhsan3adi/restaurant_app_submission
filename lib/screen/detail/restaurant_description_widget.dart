@@ -20,7 +20,7 @@ class RestaurantDescriptionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 8,
         children: [
-          Text('Description', style: textTheme.titleSmall),
+          Text('Description', style: textTheme.titleMedium),
           Text(
             restaurant.description,
             style: textTheme.bodyMedium,

@@ -85,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Foods', style: textTheme.titleSmall),
+              child: Text('Foods', style: textTheme.titleMedium),
             ),
           ),
           Consumer<RestaurantDetailProvider>(
@@ -105,7 +105,7 @@ class _DetailScreenState extends State<DetailScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Drinks', style: textTheme.titleSmall),
+              child: Text('Drinks', style: textTheme.titleMedium),
             ),
           ),
           Consumer<RestaurantDetailProvider>(
