@@ -64,10 +64,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: RestaurantListErrorWidget(message: message),
                 ),
               RestaurantDetailLoadedState(data: var restaurant) =>
-                SliverToBoxAdapter(
-                  child: RestaurantDescriptionWidget(
-                    description: restaurant.description,
-                  ),
+                SliverList.list(
+                  children: [
+                    RestaurantDescriptionWidget(restaurant: restaurant),
+                  ],
                 ),
               _ => SliverToBoxAdapter(),
             },
