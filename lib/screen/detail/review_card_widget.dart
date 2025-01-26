@@ -23,7 +23,7 @@ class ReviewCardWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
-        titleAlignment: ListTileTitleAlignment.top,
+        titleAlignment: ListTileTitleAlignment.titleHeight,
         leading: CircleAvatar(
           backgroundColor: theme.colorScheme.primary,
           child: Text(review.name[0].toUpperCase()),
