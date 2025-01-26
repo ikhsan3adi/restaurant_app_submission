@@ -58,6 +58,10 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
               spacing: 12,
               children: [
                 switch (value.resultState) {
+                  NewRestaurantReviewLoadingState() => Text(
+                      'Submitting...',
+                      style: textTheme.bodyMedium,
+                    ),
                   NewRestaurantReviewErrorState(error: var message) => Text(
                       message,
                       style: textTheme.bodyMedium?.copyWith(
@@ -72,8 +76,8 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
                 TextFormField(
                   autofocus: true,
                   controller: _nameController,
-                  readOnly:
-                      value.resultState is NewRestaurantReviewLoadingState,
+                  enabled:
+                      value.resultState is! NewRestaurantReviewLoadingState,
                   maxLength: 64,
                   decoration: InputDecoration(
                     labelText: 'Your name',
@@ -91,8 +95,8 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
                   minLines: 3,
                   maxLines: 5,
                   maxLength: 1000,
-                  readOnly:
-                      value.resultState is NewRestaurantReviewLoadingState,
+                  enabled:
+                      value.resultState is! NewRestaurantReviewLoadingState,
                   decoration: InputDecoration(
                     labelText: 'Your review',
                     alignLabelWithHint: true,
