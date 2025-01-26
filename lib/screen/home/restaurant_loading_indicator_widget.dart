@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class RestaurantLoadingIndicatorWidget extends StatelessWidget {
-  const RestaurantLoadingIndicatorWidget({super.key});
+  const RestaurantLoadingIndicatorWidget({
+    super.key,
+    this.text = 'Please wait...',
+  });
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class RestaurantLoadingIndicatorWidget extends StatelessWidget {
         children: [
           CircularProgressIndicator(),
           Text(
-            'Please wait...',
+            text,
             style: textTheme.titleMedium,
           ),
         ],
