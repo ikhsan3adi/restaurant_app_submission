@@ -52,7 +52,7 @@ class ApiServices {
   ) async {
     final response = await http.post(
       Uri.parse('$_baseUrl/review'),
-      body: review.toJson(),
+      body: jsonEncode(review.toJson()),
       headers: {'Content-Type': 'application/json'},
     );
 
