@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/screen/detail/add_review_button.dart';
 import 'package:restaurant_app/screen/detail/detail_screen_app_bar_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_categories_widget.dart';
 import 'package:restaurant_app/screen/detail/restaurant_customer_review_widget.dart';
@@ -44,6 +45,7 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: AddReviewButton(),
       body: CustomScrollView(
         slivers: [
           DetailScreenAppBarWidget(

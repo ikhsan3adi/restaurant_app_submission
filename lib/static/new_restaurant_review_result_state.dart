@@ -12,8 +12,8 @@ class NewRestaurantReviewErrorState extends NewRestaurantReviewResultState {
   NewRestaurantReviewErrorState(this.error);
 }
 
-class NewRestaurantReviewLoadedState extends NewRestaurantReviewResultState {
+class NewRestaurantReviewSuccessState extends NewRestaurantReviewResultState {
   final List<RestaurantCustomerReview> data;
 
-  NewRestaurantReviewLoadedState(this.data);
+  NewRestaurantReviewSuccessState(this.data);
 }

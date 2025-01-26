@@ -25,7 +25,7 @@ class NewRestaurantReviewProvider extends ChangeNotifier {
         return;
       }
 
-      _resultState = NewRestaurantReviewLoadedState(result.customerReviews);
+      _resultState = NewRestaurantReviewSuccessState(result.customerReviews);
       notifyListeners();
     } on Exception catch (e) {
       _resultState = NewRestaurantReviewErrorState(e.toString());
