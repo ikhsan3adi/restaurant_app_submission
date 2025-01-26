@@ -45,9 +45,6 @@ class _SearchScreenAppBarWidgetState extends State<SearchScreenAppBarWidget> {
         },
         decoration: InputDecoration(
           hintText: 'Search restaurant',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
           suffixIcon: IconButton(
             tooltip: 'Search Restaurant',
             onPressed: () {
