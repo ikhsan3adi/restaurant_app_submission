@@ -43,13 +43,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // Sliver App Bar with background image
           DetailScreenAppBarWidget(
             pictureId: widget.restaurant.pictureId,
             imageHeroTag: widget.imageHeroTag ?? widget.restaurant.pictureId,
@@ -72,23 +68,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   children: [
                     RestaurantCategoriesWidget(restaurant: restaurant),
                     RestaurantDescriptionWidget(restaurant: restaurant),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Divider(),
-                    ),
                   ],
                 ),
               _ => SliverToBoxAdapter(),
             },
           ),
+          _sectionDivider(),
           RestaurantNormalHeader(text: 'Menus'),
-          // Foods
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Foods', style: textTheme.titleMedium),
-            ),
-          ),
+          _subtitle(context, text: 'Foods'),
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadedState(data: var restaurant) =>
@@ -96,19 +83,10 @@ class _DetailScreenState extends State<DetailScreen> {
               _ => SliverToBoxAdapter(),
             },
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 128),
-              child: Divider(),
-            ),
+          _sectionDivider(
+            padding: const EdgeInsets.symmetric(horizontal: 128),
           ),
-          // Drinks
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Drinks', style: textTheme.titleMedium),
-            ),
-          ),
+          _subtitle(context, text: 'Drinks'),
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadedState(data: var restaurant) =>
@@ -116,13 +94,7 @@ class _DetailScreenState extends State<DetailScreen> {
               _ => SliverToBoxAdapter(),
             },
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Divider(),
-            ),
-          ),
-          // Customer Reviews
+          _sectionDivider(),
           RestaurantNormalHeader(text: 'Reviews'),
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
@@ -132,6 +104,31 @@ class _DetailScreenState extends State<DetailScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _subtitle(
+    BuildContext context, {
+    required String text,
+  }) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Text(text, style: textTheme.titleMedium),
+      ),
+    );
+  }
+
+  Widget _sectionDivider({
+    EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16),
+  }) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: padding,
+        child: Divider(),
       ),
     );
   }
