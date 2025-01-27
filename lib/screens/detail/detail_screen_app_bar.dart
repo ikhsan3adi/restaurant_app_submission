@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/data/enum/image_size.dart';
+import 'package:restaurant_app/widgets/restaurant_image_widget.dart';
 
 class DetailScreenAppBar extends StatelessWidget {
   const DetailScreenAppBar({
@@ -23,15 +24,11 @@ class DetailScreenAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: Hero(
           tag: imageHeroTag,
-          child: CachedNetworkImage(
-            imageUrl: ApiServices.restaurantImageUrl(
-              pictureId,
-              ImageSize.large,
-            ),
-            fit: BoxFit.cover,
+          child: RestaurantImageWidget.large(
+            pictureId: pictureId,
             fadeInDuration: Duration.zero,
-            placeholder: (context, _) => Image.network(
-              ApiServices.restaurantImageUrl(
+            placeholder: CachedNetworkImage(
+              imageUrl: ApiServices.restaurantImageUrl(
                 pictureId,
                 ImageSize.small,
               ),

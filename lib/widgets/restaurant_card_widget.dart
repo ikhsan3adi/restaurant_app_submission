@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/api/api_services.dart';
-import 'package:restaurant_app/data/enum/image_size.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/widgets/restaurant_image_widget.dart';
 
 class RestaurantCardWidget extends StatelessWidget {
   const RestaurantCardWidget({
@@ -43,28 +42,10 @@ class RestaurantCardWidget extends StatelessWidget {
                 tag: imageHeroTag ?? restaurant.pictureId,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    ApiServices.restaurantImageUrl(
-                      restaurant.pictureId,
-                      ImageSize.small,
-                    ),
-                    fit: BoxFit.cover,
+                  child: RestaurantImageWidget.small(
+                    pictureId: restaurant.pictureId,
                     width: 144,
                     height: 128,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.errorContainer,
-                        ),
-                        width: 144,
-                        height: 128,
-                        child: Icon(
-                          Icons.broken_image_outlined,
-                          size: 56,
-                          color: theme.colorScheme.onErrorContainer,
-                        ),
-                      );
-                    },
                   ),
                 ),
               ),
