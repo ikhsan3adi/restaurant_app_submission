@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_detail.dart';
 
 class RestaurantDescriptionWidget extends StatelessWidget {
@@ -21,9 +22,19 @@ class RestaurantDescriptionWidget extends StatelessWidget {
         spacing: 8,
         children: [
           Text('Description', style: textTheme.titleMedium),
-          Text(
+          ReadMoreText(
             restaurant.description,
             style: textTheme.bodyMedium,
+            trimMode: TrimMode.Line,
+            trimLines: 2,
+            lessStyle: textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.tertiary,
+            ),
+            moreStyle: textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.tertiary,
+            ),
           ),
         ],
       ),
