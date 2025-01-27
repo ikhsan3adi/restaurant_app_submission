@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/util/sliver_header_delegate.dart';
+import 'package:restaurant_app/utils/sliver_header_delegate.dart';
 
 class RestaurantNormalHeader extends StatelessWidget {
   const RestaurantNormalHeader({

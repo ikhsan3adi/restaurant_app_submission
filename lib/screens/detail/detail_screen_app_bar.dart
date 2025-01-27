@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/data/enum/image_size.dart';
 
-class DetailScreenAppBarWidget extends StatelessWidget {
-  const DetailScreenAppBarWidget({
+class DetailScreenAppBar extends StatelessWidget {
+  const DetailScreenAppBar({
     super.key,
     required this.pictureId,
     required this.imageHeroTag,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
-import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
-import 'package:restaurant_app/util/sliver_header_delegate.dart';
+import 'package:restaurant_app/utils/sliver_header_delegate.dart';
 
 class RestaurantTitleHeader extends StatelessWidget {
   const RestaurantTitleHeader({

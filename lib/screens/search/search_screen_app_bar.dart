@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
-import 'package:restaurant_app/util/debouncer.dart';
+import 'package:restaurant_app/providers/search/restaurant_search_provider.dart';
+import 'package:restaurant_app/utils/debouncer.dart';
 
-class SearchScreenAppBarWidget extends StatefulWidget
-    implements PreferredSizeWidget {
-  const SearchScreenAppBarWidget({super.key});
+class SearchScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
+  const SearchScreenAppBar({super.key});
 
   @override
-  State<SearchScreenAppBarWidget> createState() =>
-      _SearchScreenAppBarWidgetState();
+  State<SearchScreenAppBar> createState() => _SearchScreenAppBarState();
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class _SearchScreenAppBarWidgetState extends State<SearchScreenAppBarWidget> {
+class _SearchScreenAppBarState extends State<SearchScreenAppBar> {
   final _searchController = TextEditingController();
   final _debouncer = Debouncer();
 

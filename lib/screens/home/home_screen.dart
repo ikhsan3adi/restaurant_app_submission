@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
-import 'package:restaurant_app/screen/home/home_screen_app_bar_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_card_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_info_tile_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
+import 'package:restaurant_app/providers/home/restaurant_list_provider.dart';
+import 'package:restaurant_app/screens/home/home_screen_app_bar.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/static/restaurant_list_result_state.dart';
+import 'package:restaurant_app/widgets/restaurant_card_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_error_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_info_tile_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_loading_indicator_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: CustomScrollView(
           slivers: [
-            HomeScreenAppBarWidget(),
+            HomeScreenAppBar(),
             Consumer<RestaurantListProvider>(
               builder: (context, value, _) => switch (value.resultState) {
                 RestaurantListLoadedState() => SliverToBoxAdapter(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/new_restaurant_review.dart';
-import 'package:restaurant_app/provider/detail/new_restaurant_review_provider.dart';
+import 'package:restaurant_app/providers/detail/new_restaurant_review_provider.dart';
 import 'package:restaurant_app/static/new_restaurant_review_result_state.dart';
 
 class ReviewDialogWidget extends StatefulWidget {

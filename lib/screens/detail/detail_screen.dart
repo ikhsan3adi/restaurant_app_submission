@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
-import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
-import 'package:restaurant_app/screen/detail/add_review_button.dart';
-import 'package:restaurant_app/screen/detail/detail_screen_app_bar_widget.dart';
-import 'package:restaurant_app/screen/detail/restaurant_categories_widget.dart';
-import 'package:restaurant_app/screen/detail/restaurant_customer_review_widget.dart';
-import 'package:restaurant_app/screen/detail/restaurant_description_widget.dart';
-import 'package:restaurant_app/screen/detail/restaurant_menus_widget.dart';
-import 'package:restaurant_app/screen/detail/restaurant_normal_header.dart';
-import 'package:restaurant_app/screen/detail/restaurant_title_header.dart';
-import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
+import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
+import 'package:restaurant_app/screens/detail/add_review_button.dart';
+import 'package:restaurant_app/screens/detail/detail_screen_app_bar.dart';
+import 'package:restaurant_app/screens/detail/restaurant_customer_reviews.dart';
+import 'package:restaurant_app/screens/detail/restaurant_menus.dart';
+import 'package:restaurant_app/screens/detail/restaurant_normal_header.dart';
+import 'package:restaurant_app/screens/detail/restaurant_title_header.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
+import 'package:restaurant_app/widgets/restaurant_categories_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_description_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_error_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_loading_indicator_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({
@@ -48,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
       floatingActionButton: AddReviewButton(),
       body: CustomScrollView(
         slivers: [
-          DetailScreenAppBarWidget(
+          DetailScreenAppBar(
             pictureId: widget.restaurant.pictureId,
             imageHeroTag: widget.imageHeroTag ?? widget.restaurant.pictureId,
           ),
@@ -81,7 +81,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantMenusWidget(menus: restaurant.menus.foods),
+                RestaurantMenus(menus: restaurant.menus.foods),
               _ => SliverToBoxAdapter(),
             },
           ),
@@ -92,7 +92,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantMenusWidget(menus: restaurant.menus.drinks),
+                RestaurantMenus(menus: restaurant.menus.drinks),
               _ => SliverToBoxAdapter(),
             },
           ),
@@ -101,7 +101,7 @@ class _DetailScreenState extends State<DetailScreen> {
           Consumer<RestaurantDetailProvider>(
             builder: (context, value, _) => switch (value.resultState) {
               RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantCustomerReviewWidget(restaurant: restaurant),
+                RestaurantCustomerReviews(restaurant: restaurant),
               _ => SliverToBoxAdapter(),
             },
           ),

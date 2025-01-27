@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_detail.dart';
-import 'package:restaurant_app/screen/detail/review_card_widget.dart';
+import 'package:restaurant_app/widgets/review_card_widget.dart';
 
-class RestaurantCustomerReviewWidget extends StatelessWidget {
-  const RestaurantCustomerReviewWidget({
+class RestaurantCustomerReviews extends StatelessWidget {
+  const RestaurantCustomerReviews({
     super.key,
     required this.restaurant,
   });

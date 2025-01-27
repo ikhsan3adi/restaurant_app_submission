@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/theme/theme_mode_provider.dart';
+import 'package:restaurant_app/providers/theme/theme_mode_provider.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 
-class HomeScreenAppBarWidget extends StatelessWidget {
-  const HomeScreenAppBarWidget({
+class HomeScreenAppBar extends StatelessWidget {
+  const HomeScreenAppBar({
     super.key,
   });
 

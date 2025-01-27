@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
+import 'package:restaurant_app/providers/search/restaurant_search_provider.dart';
 import 'package:restaurant_app/static/restaurant_search_result_state.dart';
 
 class SearchInfoTileWidget extends StatelessWidget {

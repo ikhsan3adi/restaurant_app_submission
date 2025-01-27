@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
-import 'package:restaurant_app/provider/detail/new_restaurant_review_provider.dart';
-import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
-import 'package:restaurant_app/screen/detail/review_dialog_widget.dart';
+import 'package:restaurant_app/providers/detail/new_restaurant_review_provider.dart';
+import 'package:restaurant_app/providers/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';
+import 'package:restaurant_app/widgets/review_dialog_widget.dart';
 
 class AddReviewButton extends StatelessWidget {
   const AddReviewButton({super.key});

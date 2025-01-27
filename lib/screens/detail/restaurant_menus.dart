@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_menu.dart';
-import 'package:restaurant_app/screen/detail/menu_card_widget.dart';
+import 'package:restaurant_app/widgets/menu_card_widget.dart';
 
-class RestaurantMenusWidget extends StatelessWidget {
-  const RestaurantMenusWidget({
+class RestaurantMenus extends StatelessWidget {
+  const RestaurantMenus({
     super.key,
     required this.menus,
   });

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/provider/search/restaurant_search_provider.dart';
-import 'package:restaurant_app/screen/home/restaurant_card_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_error_widget.dart';
-import 'package:restaurant_app/screen/home/restaurant_loading_indicator_widget.dart';
-import 'package:restaurant_app/screen/search/search_info_tile_widget.dart';
-import 'package:restaurant_app/screen/search/search_screen_app_bar_widget.dart';
+import 'package:restaurant_app/providers/search/restaurant_search_provider.dart';
+import 'package:restaurant_app/screens/search/search_screen_app_bar.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/static/restaurant_search_result_state.dart';
+import 'package:restaurant_app/widgets/restaurant_card_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_error_widget.dart';
+import 'package:restaurant_app/widgets/restaurant_loading_indicator_widget.dart';
+import 'package:restaurant_app/widgets/search_info_tile_widget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -15,7 +15,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SearchScreenAppBarWidget(),
+      appBar: SearchScreenAppBar(),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: SearchInfoTileWidget()),

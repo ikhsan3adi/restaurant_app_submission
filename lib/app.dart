@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
-import 'package:restaurant_app/provider/theme/theme_mode_provider.dart';
-import 'package:restaurant_app/screen/detail/detail_screen.dart';
-import 'package:restaurant_app/screen/home/home_screen.dart';
-import 'package:restaurant_app/screen/search/search_screen.dart';
+import 'package:restaurant_app/providers/theme/theme_mode_provider.dart';
+import 'package:restaurant_app/screens/detail/detail_screen.dart';
+import 'package:restaurant_app/screens/home/home_screen.dart';
+import 'package:restaurant_app/screens/search/search_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/style/theme/restaurant_theme.dart';
 import 'package:restaurant_app/style/theme/util.dart';
