@@ -37,6 +37,10 @@ class AddReviewButton extends StatelessWidget {
                     content: Text('Review successfully submitted'),
                   ),
                 );
+
+                context
+                    .read<RestaurantDetailProvider>()
+                    .fetchRestaurantDetail(state.data.id);
               }
             },
           );
