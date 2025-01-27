@@ -46,71 +46,84 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: AddReviewButton(),
-      body: CustomScrollView(
-        slivers: [
-          DetailScreenAppBar(
-            pictureId: widget.restaurant.pictureId,
-            imageHeroTag: widget.imageHeroTag ?? widget.restaurant.pictureId,
-          ),
-          RestaurantTitleHeader(
-            restaurant: widget.restaurant,
-            titleHeroTag: widget.titleHeroTag ?? widget.restaurant.id,
-          ),
-          Consumer<RestaurantDetailProvider>(
-            builder: (context, value, _) => switch (value.resultState) {
-              RestaurantDetailLoadingState() => SliverFillRemaining(
-                  child: RestaurantLoadingIndicatorWidget(),
-                ),
-              RestaurantDetailErrorState(error: var message) =>
-                SliverFillRemaining(
-                  child: RestaurantErrorWidget(message: message),
-                ),
-              RestaurantDetailLoadedState(data: var restaurant) =>
-                SliverList.list(
-                  children: [
-                    RestaurantCategoriesWidget(restaurant: restaurant),
-                    RestaurantDescriptionWidget(restaurant: restaurant),
-                  ],
-                ),
-              _ => SliverToBoxAdapter(),
-            },
-          ),
-          _sectionDivider(),
-          RestaurantNormalHeader(text: 'Menus'),
-          _subtitle(context, text: 'Foods'),
-          Consumer<RestaurantDetailProvider>(
-            builder: (context, value, _) => switch (value.resultState) {
-              RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantMenus(menus: restaurant.menus.foods),
-              _ => SliverToBoxAdapter(),
-            },
-          ),
-          _sectionDivider(
-            padding: const EdgeInsets.symmetric(horizontal: 128),
-          ),
-          _subtitle(context, text: 'Drinks'),
-          Consumer<RestaurantDetailProvider>(
-            builder: (context, value, _) => switch (value.resultState) {
-              RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantMenus(menus: restaurant.menus.drinks),
-              _ => SliverToBoxAdapter(),
-            },
-          ),
-          _sectionDivider(),
-          RestaurantNormalHeader(text: 'Reviews'),
-          Consumer<RestaurantDetailProvider>(
-            builder: (context, value, _) => switch (value.resultState) {
-              RestaurantDetailLoadedState(data: var restaurant) =>
-                RestaurantCustomerReviews(restaurant: restaurant),
-              _ => SliverToBoxAdapter(),
-            },
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context
+              .read<RestaurantDetailProvider>()
+              .fetchRestaurantDetail(widget.restaurant.id);
+        },
+        child: _buildBody(context),
       ),
     );
   }
 
-  Widget _subtitle(
+  Widget _buildBody(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        DetailScreenAppBar(
+          pictureId: widget.restaurant.pictureId,
+          imageHeroTag: widget.imageHeroTag ?? widget.restaurant.pictureId,
+        ),
+        RestaurantTitleHeader(
+          restaurant: widget.restaurant,
+          titleHeroTag: widget.titleHeroTag ?? widget.restaurant.id,
+        ),
+        Consumer<RestaurantDetailProvider>(
+          builder: (context, value, _) => switch (value.resultState) {
+            RestaurantDetailLoadingState() => SliverFillRemaining(
+                child: RestaurantLoadingIndicatorWidget(),
+              ),
+            RestaurantDetailErrorState(error: var message) =>
+              SliverFillRemaining(
+                child: RestaurantErrorWidget(message: message),
+              ),
+            RestaurantDetailLoadedState(data: var restaurant) =>
+              SliverList.list(
+                children: [
+                  RestaurantCategoriesWidget(restaurant: restaurant),
+                  RestaurantDescriptionWidget(restaurant: restaurant),
+                ],
+              ),
+            _ => SliverToBoxAdapter(),
+          },
+        ),
+        _sectionDivider(),
+        RestaurantNormalHeader(text: 'Menus'),
+        _subtitleText(context, text: 'Foods'),
+        Consumer<RestaurantDetailProvider>(
+          builder: (context, value, _) => switch (value.resultState) {
+            RestaurantDetailLoadedState(data: var restaurant) =>
+              RestaurantMenus(menus: restaurant.menus.foods),
+            _ => SliverToBoxAdapter(),
+          },
+        ),
+        _sectionDivider(
+          padding: const EdgeInsets.symmetric(horizontal: 128),
+        ),
+        _subtitleText(context, text: 'Drinks'),
+        Consumer<RestaurantDetailProvider>(
+          builder: (context, value, _) => switch (value.resultState) {
+            RestaurantDetailLoadedState(data: var restaurant) =>
+              RestaurantMenus(menus: restaurant.menus.drinks),
+            _ => SliverToBoxAdapter(),
+          },
+        ),
+        _sectionDivider(),
+        RestaurantNormalHeader(text: 'Reviews'),
+        Consumer<RestaurantDetailProvider>(
+          builder: (context, value, _) => switch (value.resultState) {
+            RestaurantDetailLoadedState(data: var restaurant) => SliverPadding(
+                padding: EdgeInsets.only(bottom: 72),
+                sliver: RestaurantCustomerReviews(restaurant: restaurant),
+              ),
+            _ => SliverToBoxAdapter(),
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _subtitleText(
     BuildContext context, {
     required String text,
   }) {
