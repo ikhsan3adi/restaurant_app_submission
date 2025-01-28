@@ -15,11 +15,12 @@ class NewRestaurantReviewResponse {
     return NewRestaurantReviewResponse(
       error: json['error'],
       message: json['message'],
-      customerReviews: List<RestaurantCustomerReview>.from(
-        json['customerReviews'].map(
-          (x) => RestaurantCustomerReview.fromJson(x),
-        ),
-      ),
+      customerReviews: json['customerReviews'] != null
+          ? List<RestaurantCustomerReview>.from(
+              json['customerReviews']
+                  .map((x) => RestaurantCustomerReview.fromJson(x)),
+            )
+          : [],
     );
   }
 
