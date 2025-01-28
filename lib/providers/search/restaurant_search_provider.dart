@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/static/restaurant_search_result_state.dart';
+import 'package:restaurant_app/utils/error_handler.dart';
 
 class RestaurantSearchProvider extends ChangeNotifier {
   final ApiServices _apiServices;
@@ -22,16 +23,16 @@ class RestaurantSearchProvider extends ChangeNotifier {
       final result = await _apiServices.getRestaurantSearchResult(query);
 
       if (result.error) {
-        _resultState = RestaurantSearchErrorState('Unknown Error');
-        notifyListeners();
-        return;
+        _resultState = RestaurantSearchErrorState(
+          'Failed to search restaurant.',
+        );
+      } else {
+        _resultState = RestaurantSearchLoadedState(result.restaurants);
       }
-
-      _resultState = RestaurantSearchLoadedState(result.restaurants);
-      notifyListeners();
-    } on Exception catch (e) {
-      _resultState = RestaurantSearchErrorState(e.toString());
-      notifyListeners();
+    } catch (e) {
+      final errorMessage = ErrorHandler.handleError(e);
+      _resultState = RestaurantSearchErrorState(errorMessage);
     }
+    notifyListeners();
   }
 }

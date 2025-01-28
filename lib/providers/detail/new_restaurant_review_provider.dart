@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/data/model/new_restaurant_review.dart';
 import 'package:restaurant_app/static/new_restaurant_review_result_state.dart';
+import 'package:restaurant_app/utils/error_handler.dart';
 
 class NewRestaurantReviewProvider extends ChangeNotifier {
   final ApiServices _apiServices;
@@ -21,15 +22,13 @@ class NewRestaurantReviewProvider extends ChangeNotifier {
 
       if (result.error) {
         _resultState = NewRestaurantReviewErrorState(result.message);
-        notifyListeners();
-        return;
+      } else {
+        _resultState = NewRestaurantReviewSuccessState(result.customerReviews);
       }
-
-      _resultState = NewRestaurantReviewSuccessState(result.customerReviews);
-      notifyListeners();
     } on Exception catch (e) {
-      _resultState = NewRestaurantReviewErrorState(e.toString());
-      notifyListeners();
+      final errorMessage = ErrorHandler.handleError(e);
+      _resultState = NewRestaurantReviewErrorState(errorMessage);
     }
+    notifyListeners();
   }
 }
