@@ -13,16 +13,20 @@ class RestaurantLoadingIndicatorWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 16,
-        children: [
-          CircularProgressIndicator(),
-          Text(
-            text,
-            style: textTheme.titleMedium,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            CircularProgressIndicator(),
+            Text(
+              text,
+              style: textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

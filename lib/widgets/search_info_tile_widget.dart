@@ -67,7 +67,8 @@ class SearchInfoTileWidget extends StatelessWidget {
       RestaurantSearchNoneState() => Icons.search,
       RestaurantSearchLoadingState() => Icons.search,
       RestaurantSearchErrorState() => Icons.error_outline,
-      RestaurantSearchLoadedState() => Icons.restaurant_outlined,
+      RestaurantSearchLoadedState(data: var restaurants) =>
+        restaurants.isEmpty ? Icons.close_outlined : Icons.restaurant_outlined,
     };
   }
 
@@ -76,9 +77,9 @@ class SearchInfoTileWidget extends StatelessWidget {
       RestaurantSearchNoneState() =>
         'Search restaurant by name, category, or menus',
       RestaurantSearchLoadingState() => 'Searching...',
-      RestaurantSearchErrorState(error: var message) => 'Error: $message',
+      RestaurantSearchErrorState(error: var message) => message,
       RestaurantSearchLoadedState(data: var restaurants) => restaurants.isEmpty
-          ? 'No restaurant found!'
+          ? 'Restaurant not found!'
           : 'Found ${restaurants.length} restaurant(s)!',
     };
   }
