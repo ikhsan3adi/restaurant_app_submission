@@ -23,6 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final restaurantListProvider = context.read<RestaurantListProvider>();
 
+    final resultState = restaurantListProvider.resultState;
+    final isLoaded = resultState is RestaurantListLoadedState;
+    final isRestaurantNotEmpty = isLoaded ? resultState.data.isNotEmpty : false;
+
+    if (isRestaurantNotEmpty) return;
+
     Future.microtask(() {
       restaurantListProvider.fetchRestaurantList();
     });
