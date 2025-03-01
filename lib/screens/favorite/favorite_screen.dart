@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_app/providers/favorite/local_database_provider.dart';
+import 'package:restaurant_app/providers/favorite/favorite_local_database_provider.dart';
 import 'package:restaurant_app/static/favorite_list_result_state.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:restaurant_app/widgets/restaurant_card_widget.dart';
@@ -19,7 +19,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   void initState() {
     super.initState();
 
-    final localDatabaseProvider = context.read<LocalDatabaseProvider>();
+    final localDatabaseProvider = context.read<FavoriteLocalDatabaseProvider>();
 
     Future.microtask(() {
       localDatabaseProvider.loadAllRestaurant();
@@ -34,9 +34,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<LocalDatabaseProvider>().loadAllRestaurant();
+          context.read<FavoriteLocalDatabaseProvider>().loadAllRestaurant();
         },
-        child: Consumer<LocalDatabaseProvider>(
+        child: Consumer<FavoriteLocalDatabaseProvider>(
           builder: (context, value, _) {
             switch (value.listResultState) {
               case FavoriteListLoadingState():

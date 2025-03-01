@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_detail.dart';
 import 'package:restaurant_app/providers/detail/favorite_icon_provider.dart';
-import 'package:restaurant_app/providers/favorite/local_database_provider.dart';
+import 'package:restaurant_app/providers/favorite/favorite_local_database_provider.dart';
 import 'package:restaurant_app/static/favorite_operation_result_state.dart';
 
 class FavoriteIconWidget extends StatefulWidget {
@@ -27,7 +27,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
 
     restaurant = Restaurant.fromDetail(widget.restaurantDetail);
 
-    final localDatabaseProvider = context.read<LocalDatabaseProvider>();
+    final localDatabaseProvider = context.read<FavoriteLocalDatabaseProvider>();
     final favIconProvider = context.read<FavoriteIconProvider>();
 
     Future.microtask(() async {
@@ -57,7 +57,8 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
             : Icons.favorite_outline,
       ),
       onPressed: () async {
-        final localDatabaseProvider = context.read<LocalDatabaseProvider>();
+        final localDatabaseProvider =
+            context.read<FavoriteLocalDatabaseProvider>();
 
         if (localDatabaseProvider.operationResultState
             is FavoriteOperationLoadingState) {

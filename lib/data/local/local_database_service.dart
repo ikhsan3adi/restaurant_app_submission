@@ -3,13 +3,13 @@ import 'package:sqflite/sqflite.dart';
 
 class LocalDatabaseService {
   static const String _databaseName = 'restaurant-app.db';
-  static const String _tableName = 'favorite_restaurants';
+  static const String _favoriteTableName = 'favorite_restaurants';
   static const int _version = 1;
 
   Future<void> createTables(Database database) async {
     await database.execute(
       '''
-      CREATE TABLE $_tableName(
+      CREATE TABLE $_favoriteTableName(
         id TEXT PRIMARY KEY,
         name TEXT,
         description TEXT,
@@ -29,29 +29,29 @@ class LocalDatabaseService {
     );
   }
 
-  Future<int> insertItem(Restaurant restaurant) async {
+  Future<int> insertFavoriteRestaurant(Restaurant restaurant) async {
     final db = await _initializeDb();
 
-    final data = restaurant.toDbMap();
+    final restaurantData = restaurant.toDbMap();
     final id = await db.insert(
-      _tableName,
-      data,
+      _favoriteTableName,
+      restaurantData,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return id;
   }
 
-  Future<List<Restaurant>> getAllItems() async {
+  Future<List<Restaurant>> getAllFavoriteRestaurants() async {
     final db = await _initializeDb();
-    final results = await db.query(_tableName);
+    final results = await db.query(_favoriteTableName);
 
     return results.map((result) => Restaurant.fromDbMap(result)).toList();
   }
 
-  Future<Restaurant> getItemById(String id) async {
+  Future<Restaurant> getFavoriteRestaurantById(String id) async {
     final db = await _initializeDb();
     final results = await db.query(
-      _tableName,
+      _favoriteTableName,
       where: 'id = ?',
       whereArgs: [id],
       limit: 1,
@@ -60,14 +60,14 @@ class LocalDatabaseService {
     return results.map((result) => Restaurant.fromDbMap(result)).first;
   }
 
-  Future<int> removeItem(String id) async {
+  Future<int> removeFavoriteRestaurant(String id) async {
     final db = await _initializeDb();
 
-    final result = await db.delete(
-      _tableName,
+    final deletedRows = await db.delete(
+      _favoriteTableName,
       where: 'id = ?',
       whereArgs: [id],
     );
-    return result;
+    return deletedRows;
   }
 }
