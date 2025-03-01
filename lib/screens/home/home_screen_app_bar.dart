@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:restaurant_app/providers/theme/theme_mode_provider.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 
 class HomeScreenAppBar extends StatelessWidget {
@@ -24,21 +22,6 @@ class HomeScreenAppBar extends StatelessWidget {
           icon: Hero(
             tag: 'search-btn',
             child: Icon(Icons.search),
-          ),
-        ),
-        IconButton(
-          tooltip: 'Switch Theme',
-          onPressed: () {
-            context.read<ThemeModeProvider>().toggleTheme();
-          },
-          icon: Consumer<ThemeModeProvider>(
-            builder: (context, value, _) {
-              return Icon(
-                value.themeMode == ThemeMode.dark
-                    ? Icons.light_mode_outlined
-                    : Icons.dark_mode_outlined,
-              );
-            },
           ),
         ),
       ],
