@@ -1,44 +1,36 @@
 import 'package:flutter/widgets.dart';
 import 'package:restaurant_app/data/local/local_database_service.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/static/favorite_list_result_state.dart';
+import 'package:restaurant_app/static/favorite_operation_result_state.dart';
+import 'package:restaurant_app/utils/error_handler.dart';
 
 class LocalDatabaseProvider extends ChangeNotifier {
   final LocalDatabaseService _service;
 
   LocalDatabaseProvider(this._service);
 
-  String? _message;
-  String? get message => _message;
+  FavoriteListResultState _listResultState = FavoriteListNoneState();
+  FavoriteListResultState get listResultState => _listResultState;
 
-  List<Restaurant>? _restaurantList;
-  List<Restaurant>? get restaurantList => _restaurantList;
+  FavoriteOperationResultState _operationResultState =
+      FavoriteOperationNoneState();
+  FavoriteOperationResultState get operationResultState =>
+      _operationResultState;
 
   Restaurant? _restaurant;
   Restaurant? get restaurant => _restaurant;
 
-  Future<void> saveRestaurant(Restaurant value) async {
-    try {
-      final result = await _service.insertItem(value);
-
-      final isError = result == 0;
-      if (isError) {
-        _message = 'Failed to save your data';
-      } else {
-        _message = 'Your data is saved';
-      }
-    } catch (e) {
-      _message = 'Failed to save your data';
-    }
-    notifyListeners();
-  }
-
   Future<void> loadAllRestaurant() async {
     try {
-      _restaurantList = await _service.getAllItems();
+      _listResultState = FavoriteListLoadingState();
+      notifyListeners();
+
+      final result = await _service.getAllItems();
+      _listResultState = FavoriteListLoadedState(result);
       _restaurant = null;
-      _message = 'All of your data is loaded';
     } catch (e) {
-      _message = 'Failed to load your all data';
+      _listResultState = FavoriteListErrorState(ErrorHandler.handleError(e));
     }
     notifyListeners();
   }
@@ -46,19 +38,54 @@ class LocalDatabaseProvider extends ChangeNotifier {
   Future<void> loadRestaurantById(String id) async {
     try {
       _restaurant = await _service.getItemById(id);
-      _message = 'Your data is loaded';
     } catch (e) {
-      _message = 'Failed to load your data';
+      _operationResultState = FavoriteOperationErrorState(
+        ErrorHandler.handleError(e),
+      );
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveRestaurant(Restaurant value) async {
+    try {
+      _operationResultState = FavoriteOperationLoadingState();
+      notifyListeners();
+
+      final result = await _service.insertItem(value);
+
+      final isError = result == 0;
+      if (isError) {
+        _operationResultState = FavoriteOperationErrorState(
+          'Failed to save favorite restaurant.',
+        );
+      } else {
+        _operationResultState = FavoriteOperationSuccessState(
+          'Restaurant added to favorite!',
+        );
+      }
+    } catch (e) {
+      _operationResultState = FavoriteOperationErrorState(
+        ErrorHandler.handleError(e),
+      );
     }
     notifyListeners();
   }
 
   Future<void> removeRestaurantById(String id) async {
     try {
+      _operationResultState = FavoriteOperationLoadingState();
+      notifyListeners();
+
       await _service.removeItem(id);
-      _message = 'Your data is removed';
+      _restaurant = null;
+
+      _operationResultState = FavoriteOperationSuccessState(
+        'Restaurant removed from favorite.',
+      );
     } catch (e) {
-      _message = 'Failed to remove your data';
+      _operationResultState = FavoriteOperationErrorState(
+        ErrorHandler.handleError(e),
+      );
     }
     notifyListeners();
   }

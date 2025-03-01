@@ -4,6 +4,7 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_detail.dart';
 import 'package:restaurant_app/providers/detail/favorite_icon_provider.dart';
 import 'package:restaurant_app/providers/favorite/local_database_provider.dart';
+import 'package:restaurant_app/static/favorite_operation_result_state.dart';
 
 class FavoriteIconWidget extends StatefulWidget {
   const FavoriteIconWidget({
@@ -57,8 +58,15 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
       ),
       onPressed: () async {
         final localDatabaseProvider = context.read<LocalDatabaseProvider>();
+
+        if (localDatabaseProvider.operationResultState
+            is FavoriteOperationLoadingState) {
+          return;
+        }
+
         final favIconProvider = context.read<FavoriteIconProvider>();
         final isFavorited = favIconProvider.isFavorited;
+        final scaffoldMessenger = ScaffoldMessenger.of(context);
 
         if (isFavorited) {
           await localDatabaseProvider.removeRestaurantById(
@@ -67,8 +75,25 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
         } else {
           await localDatabaseProvider.saveRestaurant(restaurant);
         }
-        favIconProvider.isFavorited = !isFavorited;
-        localDatabaseProvider.loadAllRestaurant();
+
+        scaffoldMessenger.clearSnackBars();
+
+        switch (localDatabaseProvider.operationResultState) {
+          case FavoriteOperationSuccessState(message: var message):
+            favIconProvider.isFavorited = !isFavorited;
+            scaffoldMessenger.showSnackBar(SnackBar(
+              content: Text(message),
+            ));
+            break;
+          case FavoriteOperationErrorState(error: var message):
+            scaffoldMessenger.showSnackBar(SnackBar(
+              content: Text(message),
+            ));
+            break;
+          default:
+        }
+
+        await localDatabaseProvider.loadAllRestaurant();
       },
     );
   }
