@@ -25,7 +25,7 @@ import workmanager
   
     WorkmanagerPlugin.registerBGProcessingTask(withIdentifier: "task-identifier")
   
-    WorkmanagerPlugin.registerPeriodicTask(withIdentifier: "com.example.restaurant_app", frequency: NSNumber(value: 16 * 60))
+    WorkmanagerPlugin.registerPeriodicTask(withIdentifier: "daily_reminder_task", frequency: NSNumber(value: 16 * 60))
 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

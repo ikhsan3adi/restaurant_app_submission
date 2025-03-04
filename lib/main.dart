@@ -10,8 +10,11 @@ import 'package:restaurant_app/providers/favorite/favorite_local_database_provid
 import 'package:restaurant_app/providers/home/restaurant_list_provider.dart';
 import 'package:restaurant_app/providers/main/index_nav_provider.dart';
 import 'package:restaurant_app/providers/search/restaurant_search_provider.dart';
+import 'package:restaurant_app/providers/setting/local_notification_provider.dart';
 import 'package:restaurant_app/providers/setting/shared_preferences_provider.dart';
 import 'package:restaurant_app/providers/theme/theme_mode_provider.dart';
+import 'package:restaurant_app/services/local_notification_service.dart';
+import 'package:restaurant_app/services/workmanager_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -29,6 +32,14 @@ Future<void> main() async {
         ),
         Provider(
           create: (_) => SharedPreferencesService(prefs),
+        ),
+        Provider(
+          create: (_) => LocalNotificationService()
+            ..init()
+            ..configureLocalTimeZone(),
+        ),
+        Provider(
+          create: (_) => WorkmanagerService()..init(),
         ),
         ChangeNotifierProvider(
           create: (context) => SharedPreferencesProvider(
@@ -75,6 +86,11 @@ Future<void> main() async {
           create: (context) => NewRestaurantReviewProvider(
             context.read<ApiServices>(),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LocalNotificationProvider(
+            context.read<LocalNotificationService>(),
+          )..requestPermissions(),
         ),
       ],
       child: const App(),
