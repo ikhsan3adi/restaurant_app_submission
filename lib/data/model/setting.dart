@@ -13,7 +13,7 @@ class Setting {
   }) {
     return Setting(
       darkModeEnable: darkModeEnable ?? this.darkModeEnable,
-      dailyReminderEnable: darkModeEnable ?? this.dailyReminderEnable,
+      dailyReminderEnable: dailyReminderEnable ?? this.dailyReminderEnable,
     );
   }
 }
