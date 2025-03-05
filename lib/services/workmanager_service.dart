@@ -12,6 +12,8 @@ void callbackDispatcher() {
     if (task == MyWorkmanager.periodic.taskName) {
       final apiService = ApiServices();
       final notificationService = LocalNotificationService();
+      await notificationService.init();
+      await notificationService.configureLocalTimeZone();
 
       try {
         final restaurants = await apiService.getRestaurantList();
@@ -51,10 +53,14 @@ class WorkmanagerService {
     );
   }
 
-  Future<void> runPeriodicTask({Map<String, dynamic>? inputData}) async {
+  Future<void> runPeriodicTask({
+    required String uniqueName,
+    required String taskName,
+    Map<String, dynamic>? inputData,
+  }) async {
     await _workmanager.registerPeriodicTask(
-      MyWorkmanager.periodic.uniqueName,
-      MyWorkmanager.periodic.taskName,
+      uniqueName,
+      taskName,
       frequency: const Duration(hours: 24),
       tag: MyWorkmanager.periodic.taskName,
       initialDelay: Duration.zero,

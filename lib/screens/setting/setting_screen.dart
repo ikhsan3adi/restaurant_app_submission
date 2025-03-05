@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/model/setting.dart';
 import 'package:restaurant_app/providers/setting/local_notification_provider.dart';
 import 'package:restaurant_app/providers/setting/shared_preferences_provider.dart';
 import 'package:restaurant_app/providers/theme/theme_mode_provider.dart';
@@ -37,8 +38,7 @@ class SettingScreen extends StatelessWidget {
           ),
           SwitchListTile.adaptive(
             value: context
-                .watch<SharedPreferencesProvider>()
-                .setting!
+                .select<SharedPreferencesProvider, Setting>((p) => p.setting!)
                 .dailyReminderEnable,
             onChanged: (value) async {
               final localNotificationProvider =
@@ -46,14 +46,20 @@ class SettingScreen extends StatelessWidget {
               final workmanagerService = context.read<WorkmanagerService>();
               final sharedPrefsProvider =
                   context.read<SharedPreferencesProvider>();
-              final setting = sharedPrefsProvider.setting!;
+              var setting = sharedPrefsProvider.setting!;
 
               await sharedPrefsProvider.saveSettingValue(setting.copyWith(
                 dailyReminderEnable: value,
               ));
 
+              sharedPrefsProvider.getSettingValue();
+              setting = sharedPrefsProvider.setting!;
+
               if (setting.dailyReminderEnable) {
-                await workmanagerService.runPeriodicTask();
+                await workmanagerService.runPeriodicTask(
+                  uniqueName: MyWorkmanager.periodic.uniqueName,
+                  taskName: MyWorkmanager.periodic.taskName,
+                );
               } else {
                 await workmanagerService.cancelTask(
                   MyWorkmanager.periodic.taskName,
@@ -63,8 +69,8 @@ class SettingScreen extends StatelessWidget {
                 );
               }
             },
-            title: Text('Daily Reminder'),
-            subtitle: Text('Go dark for a sleek look and easier reading'),
+            title: Text('Daily Lunch Reminder'),
+            subtitle: Text('Lunch reminder every 11am'),
           ),
         ],
       ),
