@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/data/model/restaurant_detail/restaurant_detail.dart';
 
-class Restaurant {
+class Restaurant extends Equatable {
   final String id;
   final String name;
   final String description;
@@ -67,4 +68,7 @@ class Restaurant {
       rating: detail.rating,
     );
   }
+
+  @override
+  List<Object?> get props => [id, name, description, pictureId, city, rating];
 }
