@@ -16,11 +16,11 @@ void callbackDispatcher() {
       await notificationService.configureLocalTimeZone();
 
       try {
-        final restaurants = await apiService.getRestaurantList();
+        final response = await apiService.getRestaurantList();
+        final restaurants = response.restaurants;
 
-        if (restaurants.restaurants.isNotEmpty) {
-          final restaurant = restaurants
-              .restaurants[Random().nextInt(restaurants.restaurants.length)];
+        if (restaurants.isNotEmpty) {
+          final restaurant = restaurants[Random().nextInt(restaurants.length)];
 
           await notificationService.scheduleDailyElevenAMNotification(
             id: LocalNotificationService.dailyReminderNotificationId,
