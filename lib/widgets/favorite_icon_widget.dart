@@ -43,6 +43,7 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
     final theme = Theme.of(context);
 
     return IconButton.filled(
+      key: const ValueKey('favorite_button'),
       tooltip: context.watch<FavoriteIconProvider>().isFavorited
           ? 'Remove from favorite'
           : 'Add to favorite',

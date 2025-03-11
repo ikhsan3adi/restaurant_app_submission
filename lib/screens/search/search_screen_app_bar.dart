@@ -34,6 +34,7 @@ class _SearchScreenAppBarState extends State<SearchScreenAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: TextField(
+        key: const ValueKey('search_text_field'),
         autofocus: true,
         controller: _searchController,
         onChanged: (value) {
@@ -44,6 +45,7 @@ class _SearchScreenAppBarState extends State<SearchScreenAppBar> {
         decoration: InputDecoration(
           hintText: 'Search restaurant',
           suffixIcon: IconButton(
+            key: const ValueKey('search_button'),
             tooltip: 'Search Restaurant',
             onPressed: () {
               context

@@ -80,18 +80,21 @@ class _MainScreenState extends State<MainScreen> {
         },
         items: [
           BottomNavigationBarItem(
+            key: const ValueKey('nav_home_button'),
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
             label: 'Home',
             tooltip: 'Home',
           ),
           BottomNavigationBarItem(
+            key: const ValueKey('nav_favorite_button'),
             icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
             label: 'Favorite',
             tooltip: 'Favorite',
           ),
           BottomNavigationBarItem(
+            key: const ValueKey('nav_setting_button'),
             icon: Icon(Icons.settings_outlined),
             activeIcon: Icon(Icons.settings),
             label: 'Setting',

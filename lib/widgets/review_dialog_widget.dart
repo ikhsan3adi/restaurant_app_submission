@@ -74,6 +74,7 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
                     ),
                 },
                 TextFormField(
+                  key: const ValueKey('review_name_field'),
                   autofocus: true,
                   controller: _nameController,
                   enabled:
@@ -91,6 +92,7 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
                   },
                 ),
                 TextFormField(
+                  key: const ValueKey('review_review_field'),
                   controller: _reviewController,
                   minLines: 3,
                   maxLines: 5,
@@ -120,6 +122,7 @@ class _ReviewDialogWidgetState extends State<ReviewDialogWidget> {
         ),
         Consumer<NewRestaurantReviewProvider>(
           builder: (context, value, _) => TextButton(
+            key: const ValueKey('submit_review_button'),
             onPressed: switch (value.resultState) {
               NewRestaurantReviewLoadingState() => null,
               _ => () async {

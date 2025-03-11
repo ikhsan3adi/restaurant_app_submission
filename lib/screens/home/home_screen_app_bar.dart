@@ -15,6 +15,7 @@ class HomeScreenAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
+          key: const ValueKey('search_page_button'),
           tooltip: 'Search Restaurant',
           onPressed: () {
             Navigator.pushNamed(context, NavigationRoute.searchRoute.name);

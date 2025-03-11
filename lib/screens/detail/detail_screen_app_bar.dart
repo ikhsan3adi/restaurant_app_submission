@@ -43,6 +43,7 @@ class DetailScreenAppBar extends StatelessWidget {
         ),
       ),
       leading: IconButton.filled(
+        key: const ValueKey('detail_back_button'),
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(
             theme.colorScheme.surfaceContainerHigh,

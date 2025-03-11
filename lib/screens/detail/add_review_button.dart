@@ -16,6 +16,7 @@ class AddReviewButton extends StatelessWidget {
         final state = value.resultState;
         if (state is RestaurantDetailLoadedState) {
           return FloatingActionButton.extended(
+            key: const ValueKey('add_review_button'),
             label: Text('Give a review'),
             icon: Icon(Icons.star),
             onPressed: () async {
