@@ -8,6 +8,7 @@ abstract class BaseRobot {
 
   Future<void> loadUI(Widget widget) async {
     await tester.pumpWidget(widget);
+    await tester.pumpAndSettle();
   }
 
   Future<void> tap(Finder finder) async {
